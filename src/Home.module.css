@@ -1,0 +1,68 @@
+.Wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120.93deg, #000000 4.58%, #f3f4f5 91.02%);
+  color: "#000";
+
+  
+}
+.Heading {
+  font-size: 50px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: "Orbitron";
+  /* background: -webkit-linear-gradient(#ff0b0b, #33333314); */
+  color: #fcfafa;
+  opacity: 0.5;
+  /* -webkit-background-clip: text; */
+  opacity: 0.7;
+  /* -webkit-text-fill-color: transparent; */
+}
+.subHeading {
+  font-size: 20px;
+  color: rgb(255, 255, 254);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: "Orbitron";
+  /* filter: drop-shadow(-1px -1px 2px rgba(255, 165, 0, 1)); */
+  margin-top: 0px;
+}
+.button {
+  background: linear-gradient(120.93deg, #000000 4.58%, #ffffff 91.02%);
+  padding: 50px;
+  /* clip-path: polygon(0% 0%, 7% 100%, 87% 88%, 94% 4%); */
+}
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  /* -webkit-clip-path: polygon(0% 0%, 7% 100%, 87% 88%, 94% 4%);
+  clip-path: polygon(0% 0%, 7% 100%, 87% 88%, 94% 4%); */
+  background-color: rgb(0 0 0 / 1);
+}
+.tagwrap {
+  filter: drop-shadow(-1px -1px 2px rgb(253, 253, 253));
+}
+
+.Link {
+  text-decoration: none;
+  font-size: 24px;
+  color: rgb(252, 251, 250);
+  font-weight: 900;
+}
+.Linkwrapper {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.List {
+  list-style-type: none;
+  padding: 0 !important;
+}
+.Logo {
+  object-fit: contain;
+}

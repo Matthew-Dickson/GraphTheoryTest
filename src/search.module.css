@@ -1,0 +1,113 @@
+.array {
+  display: flex;
+  border: 3px solid orange;
+}
+
+.arrayItem {
+  display: flex;
+  padding: 20px;
+  background: transparent;
+  color: rgb(253, 252, 251);
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(120.93deg, #000000 4.58%, #fdfdfd 91.02%);
+}
+.fieldError {
+  color: #fffbfb;
+}
+.status {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #fcfbf8;
+  font-size: 20px;
+  font-weight: 900;
+  font-family: "Orbitron";
+}
+.button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  background: #00050c;
+  color: rgb(245, 243, 239);
+  margin-top: 15px;
+}
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.description {
+  width: 50%;
+  color: rgb(245, 244, 241);
+}
+.heading {
+  color: rgb(247, 245, 241);
+}
+.input {
+  width: 50px;
+  padding: 3px;
+  font-size: 18px;
+  border: 1px solid rgb(252, 250, 246);
+  background: transparent;
+  color: rgb(253, 252, 249);
+}
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.formInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.link {
+  color: rgb(250, 248, 243);
+}
+.background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.radioGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.radioGroup > label {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.questionLabel {
+  font-family: "Orbitron";
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.heading {
+  font-family: "Orbitron";
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+.buttonWapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
