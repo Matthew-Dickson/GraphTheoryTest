@@ -7,46 +7,29 @@ import { ProgressContext } from "./Context";
 import { ClipButton } from "./Components/ClipButton";
 import { clipPaths } from "./Home";
 
+
 const schema = yup.object().shape({
   question1: yup.string().required("please answer this question"),
   question2: yup.string().required("please answer this question"),
   question3: yup.string().required("please answer this question"),
-  question4: yup.string().required("please answer this question"),
-  question5: yup.string().required("please answer this question"),
-  question6: yup.string().required("please answer this question"),
-  question7: yup.string().required("please answer this question"),
-  question8: yup.string().required("please answer this question"),
-  question9: yup.string().required("please answer this question"),
 });
 
 const answers = {
-  question1: "Logarithmic search",
-  question2: "True",
+  question1: "three",
+  question2: "two",
   question3: "True",
-  question4: "O(log n)",
-  question5: "True",
-  question6: "True",
-  question7: "Both",
-  question8: "Binary Search",
-  question9: "True",
 };
 
 export function DijkstraAlgoQuiz() {
   const { unlocked, setUnlocked } = useContext(ProgressContext);
   return (
     <div className={classes.wrapper}>
-      <h1 className={classes.heading}>test your knowledge</h1>
+      <h1 className={classes.heading}>Test your knowledge</h1>
       <Formik
         initialValues={{
           question1: "",
           question2: "",
           question3: "",
-          question4: "",
-          question5: "",
-          question6: "",
-          question7: "",
-          question8: "",
-          question9: "",
         }}
         validationSchema={schema}
         onSubmit={async (values, { setStatus }) => {
@@ -59,23 +42,34 @@ export function DijkstraAlgoQuiz() {
               }
             });
 
-            setStatus({
-              msg: `${correct} out of ${
-                Object.entries(values).length
-              } are correct`,
-              type: "success",
-            });
+        
 
-            if (correct >= 6) {
+            if (correct >= 2) {
+
+              setStatus({
+                msg: `${correct} out of ${
+                  Object.entries(values).length
+                } are correct. Congratulations you have completed the course`,
+                type: "success",
+              });
+
+
               let vals = [];
               vals = JSON.parse(localStorage.getItem("unlockedPages"));
+              
               if (vals.includes("hashing") === false) {
                 vals.push("hashing");
               }
               localStorage.setItem("unlockedPages", JSON.stringify(vals));
 
               setUnlocked([...unlocked, "hashing"]);
-            }
+            }else{
+              setStatus({
+                msg: `${correct} out of ${
+                  Object.entries(values).length
+                } are correct`,
+                type: "success",
+              });}
           } catch (error) {
             setStatus({
               msg: error,
@@ -89,7 +83,7 @@ export function DijkstraAlgoQuiz() {
           <Form className={classes.quiz} onSubmit={handleSubmit}>
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Binary search is also known as?
+                Which one of the following finds the shortest path in a weighted graph?
               </label>
               <div
                 role="group"
@@ -100,21 +94,21 @@ export function DijkstraAlgoQuiz() {
                   <Field
                     type="radio"
                     name="question1"
-                    value="Sequential search"
+                    value="one"
                   />
-                  Sequential search
+                Depth-first
                 </label>
                 <label>
                   <Field
                     type="radio"
                     name="question1"
-                    value="Logarithmic search"
+                    value="two"
                   />
-                  Logarithmic search
+                Breadth-first
                 </label>
                 <label>
-                  <Field type="radio" name="question1" value="Hashing" />
-                  Hashing
+                  <Field type="radio" name="question1" value="three" />
+                Dijkstra algorithm
                 </label>
               </div>
             </div>
@@ -125,7 +119,7 @@ export function DijkstraAlgoQuiz() {
             />
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Binary search requires a data structure to be sorted?
+              How does Dijkstra’s algorithm find the shortest path tree from a single source node?
               </label>
               <div
                 role="group"
@@ -133,12 +127,16 @@ export function DijkstraAlgoQuiz() {
                 className={classes.radioGroup}
               >
                 <label>
-                  <Field type="radio" name="question2" value="True" />
-                  True
+                  <Field type="radio" name="question2" value="one" />
+                  By randomly guessing which path to build
                 </label>
                 <label>
-                  <Field type="radio" name="question2" value="False" />
-                  False
+                  <Field type="radio" name="question2" value="two" />
+                  By building a set of nodes that have minimum distance from the source
+                </label>
+                <label>
+                  <Field type="radio" name="question2" value="three" />
+                  Neither option
                 </label>
               </div>
             </div>
@@ -149,7 +147,7 @@ export function DijkstraAlgoQuiz() {
             />
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Binary search is considered an optimal searching algorithm?
+              Is Dijkstra's algorithm conceptually similar to breadth-first search but respects edge costs?
               </label>
               <div
                 role="group"
@@ -171,169 +169,7 @@ export function DijkstraAlgoQuiz() {
               component="div"
               className={classes.fieldError}
             />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                What is the average case performance of binary search?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question4" value="O(n)" />
-                  O(n)
-                </label>
-                <label>
-                  <Field type="radio" name="question4" value=" O(n/2)" />
-                  O(n/2)
-                </label>
-                <label>
-                  <Field type="radio" name="question4" value="O(log n)" />
-                  O(log n)
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question4"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                The worst case performance is the same as the average case
-                performance for binary search
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question5" value="True" />
-                  True
-                </label>
-                <label>
-                  <Field type="radio" name="question5" value="False" />
-                  False
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question5"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                Binary search is faster than linear search?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question6" value="True" />
-                  True
-                </label>
-                <label>
-                  <Field type="radio" name="question6" value="False" />
-                  False
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question6"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                Which of the following searching algorithm has a best case
-                performance of O(1)?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question7" value="Binary Search" />
-                  Binary Search
-                </label>
-                <label>
-                  <Field type="radio" name="question7" value="Linear Search" />
-                  Linear Search
-                </label>
-                <label>
-                  <Field type="radio" name="question7" value="Both" />
-                  Both
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question7"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                Which searching algorithm In terms of iterations and that works
-                only by comparing elements exhibits the best average and
-                worst-case performance of the following searching algorithms?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question8" value="Linear search" />
-                  Linear Search
-                </label>
-                <label>
-                  <Field type="radio" name="question8" value="Binary Search" />
-                  Binary Search
-                </label>
-                <label>
-                  <Field type="radio" name="question8" value="Hashing" />
-                  Hashing
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question8"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                Does binary search compare the target value to the middle
-                element of the array when applied?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question9" value="True" />
-                  True
-                </label>
-                <label>
-                  <Field type="radio" name="question9" value="False" />
-                  False
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question9"
-              component="div"
-              className={classes.fieldError}
-            />
             {status && <Box className={classes.status}>{status.msg}</Box>}
-
             <div className={classes.buttonWapper}>
               <ClipButton
                 className={classes.button}

@@ -7,6 +7,20 @@ import { SimpleTabs } from "./Components/Tabs";
 import { DijkstraAlgoQuiz } from "./DijkstraAlgoQuiz";
 import { Typography } from "@material-ui/core";
 import { ProgressContext } from "./Context";
+import { DijkstraAlgoProblem} from "./DijkstraAlgoProblem";
+import DijkstraPython from "./dijkstrasPython.PNG"
+
+
+import {ReactBlockly} from "react-blockly"
+
+import BlocklyDrawer, { Block, Category } from 'react-blockly-drawer';
+import Blockly from "blockly"
+
+
+
+
+
+
 
 
 
@@ -15,103 +29,14 @@ import { ProgressContext } from "./Context";
 
 
 export function DijkstraAlgo() {
-  const [arr, setArr] = useState([
-    { number: 1, color: "transparent" },
-    { number: 2, color: "transparent" },
-    { number: 3, color: "transparent" },
-    { number: 4, color: "transparent" },
-    { number: 5, color: "transparent" },
-    { number: 6, color: "transparent" },
-    { number: 7, color: "transparent" },
-    { number: 8, color: "transparent" },
-    { number: 9, color: "transparent" },
-  ]);
+
+ 
 
   const { unlockedQuizes, setUnlockedQuizes } = useContext(ProgressContext);
 
-  const [problemArr, setProblemArr] = useState([
-    { number: 1, color: "transparent" },
-    { number: 4, color: "transparent" },
-    { number: 62, color: "transparent" },
-    { number: 72, color: "transparent" },
-    { number: 81, color: "transparent" },
-    { number: 101, color: "transparent" },
-    { number: 200, color: "transparent" },
-    { number: 300, color: "transparent" },
-    { number: 534, color: "transparent" },
-  ]);
 
 
 
-
-  const [problemIndex, setProblemIndex] = useState(0);
-
-  const [message, setMessage] = useState("");
-
-  const [searchValue, setSearchValue] = useState(8);
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-  const getSearchOrder = (array, searchValue) => {
-    array = array.sort();
-    let x = parseInt(searchValue);
-
-    let vals = [];
-    let start = 0,
-      end = array.length - 1;
-
-    while (start <= end) {
-      let mid = Math.floor((start + end) / 2);
-
-      vals.push(array[mid].number);
-      if (array[mid].number === x) {
-        return vals;
-      } else if (array[mid].number < x) {
-        start = mid + 1;
-      } else end = mid - 1;
-    }
-    return vals;
-  };
-
-  const search = async () => {
-    let x = parseInt(searchValue);
-
-    let start = 0,
-      end = arr.length - 1;
-
-    // Iterate while start not meets end
-    while (start <= end) {
-      // Find the mid index
-      let mid = Math.floor((start + end) / 2);
-      let tempArr = [...arr];
-
-      tempArr.forEach((item, index) => {
-        item.color = "transparent";
-      });
-      tempArr[mid].color = "#2F486E";
-
-      setArr(tempArr);
-
-      // If element is present at mid, return True
-      if (arr[mid].number === x) {
-        return true;
-      }
-      // Else look in left or right half accordingly
-      else if (arr[mid].number < x) start = mid + 1;
-      else end = mid - 1;
-      await delay(800);
-    }
-
-    return false;
-  };
-
-  function handleSubmit(event) {
-    search();
-    event.preventDefault();
-  }
-
-  function handleChange(event) {
-    setSearchValue(event.target.value);
-  }
   return (
     <div className={classes.wrapper}>
       <h1 className={classes.heading}>Dijsktra's Algorithm</h1>
@@ -188,90 +113,23 @@ export function DijkstraAlgo() {
         }
         example={
         
-          <div>dw</div>
+          <div>
+            <h1>Dijkstra algorithm implemented in python is shown below:</h1>
+            <img src={DijkstraPython} width={"100%"}></img>
+          <div>
+            Blockly goes here
+          </div>
+          </div>
+      
+          
+          
           
         }
         problem={
+          
           <>
-            <h2
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                color: "#e6d470",
-              }}
-            >
-              Find the murderer known as 300 by clicking on each suspect until
-              you have found the murderer using binary search.
-            </h2>
-            <div className={classes.array}>
-              {problemArr.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={classes.arrayItem}
-                    onClick={() => {
-                      if (
-                        problemIndex + 1 ===
-                        getSearchOrder(problemArr, 300).length
-                      ) {
-                        setMessage("you have earned the binary search badge");
-                        setProblemIndex(0);
-                        let badges;
-                        badges = JSON.parse(localStorage.getItem("badges"));
-                        badges.binary = true;
-                        localStorage.setItem("badges", JSON.stringify(badges));
-                      }
-                      if (
-                        getSearchOrder(problemArr, 300)[problemIndex] ===
-                        item.number
-                      ) {
-                        setProblemIndex((prev) => prev + 1);
-                        let tempArr = [...problemArr];
-                        tempArr[index].color = "blue";
-                        setProblemArr(tempArr);
-
-                        setTimeout(() => {
-                          tempArr[index].color = "transparent";
-                          setProblemArr(tempArr);
-                        }, 800);
-                      } else {
-                        let tempArr = [...problemArr];
-                        tempArr[index].color = "red";
-                        setProblemArr(tempArr);
-
-                        setTimeout(() => {
-                          tempArr[index].color = "transparent";
-                          setProblemArr(tempArr);
-                        }, 800);
-                        setMessage("try again");
-                        setProblemIndex(0);
-                      }
-
-                      let vals = [];
-                      vals = JSON.parse(localStorage.getItem("unlockedQuizes"));
-                      if (vals.includes("dijkstra-algo") === false) {
-                        vals.push("dijkstra-algo");
-                      }
-                      localStorage.setItem(
-                        "unlockedQuizes",
-                        JSON.stringify(vals)
-                      );
-                      if (unlockedQuizes) {
-                        setUnlockedQuizes([...unlockedQuizes, "dijkstra-algo"]);
-                      } else {
-                        setUnlockedQuizes(["dijkstra-algo"]);
-                      }
-                    }}
-                    style={{ background: item.color }}
-                  >
-                    {item.number}
-                  </div>
-                );
-              })}
-            </div>
-            <h3 style={{ display: "flex", justifyContent: "center" }}>
-              {message}
-            </h3>
+          <DijkstraAlgoProblem/>
+            
           </>
         }
         

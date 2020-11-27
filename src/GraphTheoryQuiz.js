@@ -29,7 +29,7 @@ export function GraphTheoryQuiz() {
   const { unlocked, setUnlocked } = useContext(ProgressContext);
   return (
     <div className={classes.wrapper}>
-      <h1 className={classes.heading}>test your knowledge</h1>
+      <h1 className={classes.heading}>Test your knowledge</h1>
       <Formik
         initialValues={{
           question1: "",

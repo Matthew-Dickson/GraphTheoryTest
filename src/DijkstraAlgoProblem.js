@@ -6,11 +6,8 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { ProgressContext } from "./Context";
 import { ClipButton } from "./Components/ClipButton";
 import { clipPaths } from "./Home";
-import GraphPro from "./graphProblem.png"
-import One from "./one.PNG"
-import Two from "./two.PNG"
-import Three from "./three.PNG"
-import Four from "./four.PNG"
+
+import DijkstraAlgoPro from "./dijkstrasProblem.png"
 
 
 
@@ -19,10 +16,10 @@ const schema = yup.object().shape({
 });
 
 const answers = {
-  question1: "one",
+  question1: "two",
 };
 
-export function GraphProblem() {
+export function DijkstraAlgoProblem() {
 
    
     
@@ -53,8 +50,8 @@ export function GraphProblem() {
   const { unlocked, setUnlocked } = useContext(ProgressContext);
   return (
     <div className={classes.wrapper}>
-      <h1 className={classes.heading}>Using your new found knownledge of graphs solve the problem in order to get a reward. A famous star constellation known to all explorers is depicted as a graph shown below</h1>
-      <img src={GraphPro} width={"50%"}></img>
+      <h1 className={classes.heading}>Using your new found knownledge of Dijkstra algorithm solve the problem in order to get a reward. Using the graph below, which depicts different towns and their distances.</h1>
+      <img src={DijkstraAlgoPro} width={"50%"}></img>
       <Formik
         initialValues={{
           question1: "",
@@ -74,16 +71,15 @@ export function GraphProblem() {
 
             if (correct === 1) {
                 
-                    setMessage("you have earned the linear search badge");
-                    setProblemIndex(0);
-                    let badges;
-                    badges = JSON.parse(localStorage.getItem("badges"));
-                    badges.linear = true;
-                    localStorage.setItem("badges", JSON.stringify(badges));
-   
 
-                  setStatus({
-                        msg: `You are correct, you have earned the Graph theory badge`,
+                setMessage("you have earned the Dijkstra Algorithm badge");
+                setProblemIndex(0);
+                let badges;
+                badges = JSON.parse(localStorage.getItem("badges"));
+                badges.binary = true;
+                localStorage.setItem("badges", JSON.stringify(badges));
+                setStatus({
+                        msg: `You are correct, you have earned the Dijkstra Algorithm badge`,
                         type: "success",
                       });
                 } else{
@@ -95,8 +91,8 @@ export function GraphProblem() {
 
                 let vals = [];
                 vals = JSON.parse(localStorage.getItem("unlockedQuizes"));
-                if (vals.includes("graph-theory") === false) {
-                  vals.push("graph-theory");
+                if (vals.includes("dijkstra-algo") === false) {
+                  vals.push("dijkstra-algo");
                 }
                 localStorage.setItem(
                   "unlockedQuizes",
@@ -104,9 +100,9 @@ export function GraphProblem() {
                 );
 
                 if (unlockedQuizes) {
-                  setUnlockedQuizes([...unlockedQuizes, "graph-theory"]);
+                  setUnlockedQuizes([...unlockedQuizes, "dijkstra-algo"]);
                 } else {
-                  setUnlockedQuizes(["graph-theory"]);
+                  setUnlockedQuizes(["dijkstra-algo"]);
                 }            
 
 
@@ -123,7 +119,8 @@ export function GraphProblem() {
           <Form className={classes.quiz} onSubmit={handleSubmit}>
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-              which python code showns the correct structure for this graph?
+              Starting from point A you have to travel to point e, which path would you 
+              <br></br>travel if you used Dijkstra algorithm as a guide?
               </label>
               <div
                 role="group"
@@ -136,7 +133,7 @@ export function GraphProblem() {
                     name="question1"
                     value= 'one'
                   />
-                  <img src={One} height = {"120"}></img>
+                  (A,B,D,E)
                 </label>
                 <label>
                   <Field
@@ -144,16 +141,16 @@ export function GraphProblem() {
                     name="question1"
                     value="two"
                   />
-                  <img src={Two} height = {"120"}></img>
+                  (A,C,F,E)
                 </label>
                 <label>
                   <Field type="radio" name="question1" value="three" />
-                  <img src={Three} height = {"120"}></img>
+                  (A,C,D,E)
                 </label>
 
                 <label>
                   <Field type="radio" name="question1" value="four" />
-                  <img src={Four} height = {"120"}></img>
+                  (E,D,B,A)
                 </label>
               </div>
             </div>
