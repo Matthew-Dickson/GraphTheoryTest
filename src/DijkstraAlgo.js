@@ -114,11 +114,10 @@ export function DijkstraAlgo() {
         example={
         
           <div>
-            <h1>Dijkstra algorithm implemented in python is shown below:</h1>
-            <img src={DijkstraPython} width={"100%"}></img>
-          <div>
-            Blockly goes here
-          </div>
+            <h1>Dijkstra algorithm which is implemented in python, is shown below with edublocks that can be use to play around and implement the algorithm yourself:</h1>
+            <img src={DijkstraPython} width={"50%"}></img>
+            <iframe src="https://app.edublocks.org/" style={{position:"absolute",
+            width:"35%", height:"84%", border: "2px"}}></iframe>
           </div>
       
           
