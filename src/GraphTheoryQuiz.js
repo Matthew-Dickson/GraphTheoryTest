@@ -14,21 +14,15 @@ const schema = yup.object().shape({
   question4: yup.string().required("please answer this question"),
   question5: yup.string().required("please answer this question"),
   question6: yup.string().required("please answer this question"),
-  question7: yup.string().required("please answer this question"),
-  question8: yup.string().required("please answer this question"),
-  question9: yup.string().required("please answer this question"),
 });
 
 const answers = {
-  question1: "Sequential search",
-  question2: "Searching for a value and returns it",
-  question3: "Linear search",
-  question4: "False",
-  question5: "True",
-  question6: "O(1)",
-  question7: "Needs the data structure to be sorted ",
-  question8: "Medium and small",
-  question9: "True",
+  question1: "nodes and edges",
+  question2: "edges",
+  question3: "true",
+  question4: "false",
+  question5: "true",
+  question6: "the process of traversing vertexs within a graph",
 };
 
 export function GraphTheoryQuiz() {
@@ -44,9 +38,6 @@ export function GraphTheoryQuiz() {
           question4: "",
           question5: "",
           question6: "",
-          question7: "",
-          question8: "",
-          question9: "",
         }}
         validationSchema={schema}
         onSubmit={async (values, { setStatus }) => {
@@ -58,14 +49,15 @@ export function GraphTheoryQuiz() {
                 correct++;
               }
             });
-            setStatus({
-              msg: `${correct} out of ${
-                Object.entries(values).length
-              } are correct`,
-              type: "success",
-            });
+            
 
-            if (correct >= 6) {
+            if (correct >= 4) {
+              setStatus({
+                msg: `${correct} out of ${
+                  Object.entries(values).length
+                } are correct. Congratulations you can move on to Dijkstra algorithm`,
+                type: "success",
+              });
               let vals = [];
               vals = JSON.parse(localStorage.getItem("unlockedPages"));
               if (vals.includes("dijkstra-algo") === false) {
@@ -74,6 +66,13 @@ export function GraphTheoryQuiz() {
               localStorage.setItem("unlockedPages", JSON.stringify(vals));
 
               setUnlocked([...unlocked, "dijkstra-algo"]);
+            } else{
+              setStatus({
+                msg: `${correct} out of ${
+                  Object.entries(values).length
+                } are correct`,
+                type: "success",
+              });
             }
           } catch (error) {
             setStatus({
@@ -87,7 +86,7 @@ export function GraphTheoryQuiz() {
           <Form className={classes.quiz} onSubmit={handleSubmit}>
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Linear search is also known as?
+                Which two main components are graphs made up of?
               </label>
               <div
                 role="group"
@@ -98,21 +97,21 @@ export function GraphTheoryQuiz() {
                   <Field
                     type="radio"
                     name="question1"
-                    value="Sequential search"
+                    value="nodes and lines"
                   />
-                  Sequential search
+                  Nodes and Lines
                 </label>
                 <label>
                   <Field
                     type="radio"
                     name="question1"
-                    value="Logarithmic search"
+                    value="lines and vectors"
                   />
-                  Logarithmic search
+                  Lines and Vectors
                 </label>
                 <label>
-                  <Field type="radio" name="question1" value="Hashing" />
-                  Hashing
+                  <Field type="radio" name="question1" value="nodes and edges" />
+                  Nodes and Edges
                 </label>
               </div>
             </div>
@@ -124,7 +123,7 @@ export function GraphTheoryQuiz() {
 
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Linear search does the following?
+                The lines connecting two nodes in a graph are called what?
               </label>
               <div
                 role="group"
@@ -135,25 +134,25 @@ export function GraphTheoryQuiz() {
                   <Field
                     type="radio"
                     name="question2"
-                    value="Returns sorted values"
+                    value="nodes"
                   />
-                  Returns sorted values
+                  Nodes
                 </label>
                 <label>
                   <Field
                     type="radio"
                     name="question2"
-                    value="Searching for a value and returns it"
+                    value="lines"
                   />
-                  Searching for a value and returns it
+                  Lines
                 </label>
                 <label>
                   <Field
                     type="radio"
                     name="question2"
-                    value="Searching for values and returns all values"
+                    value="edges"
                   />
-                  Searching for values and returns all values
+                  Edges
                 </label>
               </div>
             </div>
@@ -164,7 +163,7 @@ export function GraphTheoryQuiz() {
             />
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Which searching algorithm is the easiest to implement?
+                Vertices is another term used for nodes when speaking about graphs?
               </label>
               <div
                 role="group"
@@ -172,16 +171,12 @@ export function GraphTheoryQuiz() {
                 className={classes.radioGroup}
               >
                 <label>
-                  <Field type="radio" name="question3" value="Linear search" />
-                  Linear search
+                  <Field type="radio" name="question3" value="true" />
+                  True
                 </label>
                 <label>
-                  <Field type="radio" name="question3" value="Binary Search" />
-                  Binary Search
-                </label>
-                <label>
-                  <Field type="radio" name="question3" value="Hashing" />
-                  Hashing
+                  <Field type="radio" name="question3" value="false" />
+                  False
                 </label>
               </div>
             </div>
@@ -192,8 +187,7 @@ export function GraphTheoryQuiz() {
             />
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Does linear search require a data structure to be sorted for it
-                to work?
+              Nodes of a graph must be connected with one another?
               </label>
               <div
                 role="group"
@@ -201,11 +195,11 @@ export function GraphTheoryQuiz() {
                 className={classes.radioGroup}
               >
                 <label>
-                  <Field type="radio" name="question4" value="True" />
+                  <Field type="radio" name="question4" value="true" />
                   True
                 </label>
                 <label>
-                  <Field type="radio" name="question4" value="False" />
+                  <Field type="radio" name="question4" value="false" />
                   False
                 </label>
               </div>
@@ -217,8 +211,7 @@ export function GraphTheoryQuiz() {
             />
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                Does Linear search require it to search a whole data structure
-                in the worst case?
+                A cyclic graph is a graph containing atleast one cycle?
               </label>
               <div
                 role="group"
@@ -226,11 +219,11 @@ export function GraphTheoryQuiz() {
                 className={classes.radioGroup}
               >
                 <label>
-                  <Field type="radio" name="question5" value="True" />
+                  <Field type="radio" name="question5" value="true" />
                   True
                 </label>
                 <label>
-                  <Field type="radio" name="question5" value="False" />
+                  <Field type="radio" name="question5" value="false" />
                   False
                 </label>
               </div>
@@ -242,7 +235,7 @@ export function GraphTheoryQuiz() {
             />
             <div className={classes.formInput}>
               <label className={classes.questionLabel}>
-                What is the best case performance for linear search?
+                What is graph traversal?
               </label>
               <div
                 role="group"
@@ -250,16 +243,16 @@ export function GraphTheoryQuiz() {
                 className={classes.radioGroup}
               >
                 <label>
-                  <Field type="radio" name="question6" value="O(n)" />
-                  O(n)
+                  <Field type="radio" name="question6" value="the nodes in a graph" />
+                  The nodes in a graph
                 </label>
                 <label>
-                  <Field type="radio" name="question6" value="O(1)" />
-                  O(1)
+                  <Field type="radio" name="question6" value="the process of traversing vertexs within a graph" />
+                  The process of traversing vertexs within a graph
                 </label>
                 <label>
-                  <Field type="radio" name="question6" value="O(n+6)" />
-                  O(n+6)
+                  <Field type="radio" name="question6" value="the process of shortening a graph" />
+                  The process of shortening a graph
                 </label>
               </div>
             </div>
@@ -268,111 +261,7 @@ export function GraphTheoryQuiz() {
               component="div"
               className={classes.fieldError}
             />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                What is untrue about linear search?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field
-                    type="radio"
-                    name="question7"
-                    value="Is slow when used on large data structures"
-                  />
-                  Is slow when used on large data structures
-                </label>
-                <label>
-                  <Field
-                    type="radio"
-                    name="question7"
-                    value="The worst case performance is O(n)"
-                  />
-                  The worst case performance is O(n)
-                </label>
-                <label>
-                  <Field
-                    type="radio"
-                    name="question7"
-                    value="Needs the data structure to be sorted "
-                  />
-                  Needs the data structure to be sorted
-                </label>
-                <label>
-                  <Field type="radio" name="question7" value="All the above" />
-                  All the above
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question7"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                What size of data structures should linear search be used on?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question8" value="Large" />
-                  Large
-                </label>
-                <label>
-                  <Field type="radio" name="question8" value="Medium" />
-                  Medium
-                </label>
-                <label>
-                  <Field type="radio" name="question8" value="Small" />
-                  Small
-                </label>
-                <label>
-                  <Field
-                    type="radio"
-                    name="question8"
-                    value="Medium and small"
-                  />
-                  Medium and small
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question8"
-              component="div"
-              className={classes.fieldError}
-            />
-            <div className={classes.formInput}>
-              <label className={classes.questionLabel}>
-                Can the average case performance be affected if the search
-                probabilities for each element vary when using linear search?
-              </label>
-              <div
-                role="group"
-                aria-labelledby="my-radio-group"
-                className={classes.radioGroup}
-              >
-                <label>
-                  <Field type="radio" name="question9" value="True" />
-                  True
-                </label>
-                <label>
-                  <Field type="radio" name="question9" value="False" />
-                  False
-                </label>
-              </div>
-            </div>
-            <ErrorMessage
-              name="question9"
-              component="div"
-              className={classes.fieldError}
-            />
+            
             {status && <Box className={classes.status}>{status.msg}</Box>}
             <div className={classes.buttonWapper}>
               <ClipButton
@@ -390,3 +279,5 @@ export function GraphTheoryQuiz() {
     </div>
   );
 }
+
+

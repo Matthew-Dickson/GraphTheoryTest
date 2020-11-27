@@ -8,6 +8,12 @@ import { DijkstraAlgoQuiz } from "./DijkstraAlgoQuiz";
 import { Typography } from "@material-ui/core";
 import { ProgressContext } from "./Context";
 
+
+
+
+
+
+
 export function DijkstraAlgo() {
   const [arr, setArr] = useState([
     { number: 1, color: "transparent" },
@@ -34,6 +40,9 @@ export function DijkstraAlgo() {
     { number: 300, color: "transparent" },
     { number: 534, color: "transparent" },
   ]);
+
+
+
 
   const [problemIndex, setProblemIndex] = useState(0);
 
@@ -178,41 +187,9 @@ export function DijkstraAlgo() {
           </div>
         }
         example={
-          <div>
-            <div className={classes.array}>
-              {arr.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={classes.arrayItem}
-                    style={{ background: item.color }}
-                  >
-                    {item.number}
-                  </div>
-                );
-              })}
-            </div>
-            <form onSubmit={handleSubmit} className={classes.form}>
-              <label>
-                <input
-                  type="number"
-                  min="1"
-                  max="9"
-                  value={searchValue}
-                  onChange={handleChange}
-                  className={classes.input}
-                />
-              </label>
-              <ClipButton
-                className={classes.button}
-                type={"submit"}
-                label={"search"}
-                clipPath={clipPaths[0]}
-                padding="20px"
-                fontSize="20px"
-              />
-            </form>
-          </div>
+        
+          <div>dw</div>
+          
         }
         problem={
           <>
